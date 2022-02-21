@@ -14,6 +14,8 @@ RSpec.describe Venue, type: :model do
 
     describe "InDirect Associations" do
 
+    it { should have_many(:favorited_dishes) }
+
     it { should have_many(:users) }
 
     end
