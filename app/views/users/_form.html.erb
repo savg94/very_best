@@ -1,0 +1,135 @@
+<% was_validated = user.errors.any? %>
+
+<%= form_with(model: user, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <!-- Label and input for name start -->
+  <div class="form-group">
+    <% name_class = "form-control" %>
+    <% name_was_invalid = user.errors.include?(:name) %>
+
+    <% if was_validated %>
+      <% if name_was_invalid %>
+        <% name_class << " is-invalid" %>
+      <% else %>
+        <% name_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :name %>
+    <!-- Input for name start -->
+    <%= f.text_field :name, class: name_class, placeholder: "Enter name" %>
+    <!-- Input for name end -->
+    <% if name_was_invalid %>
+      <% user.errors.full_messages_for(:name).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for name end -->
+  <!-- Label and input for email start -->
+  <div class="form-group">
+    <% email_class = "form-control" %>
+    <% email_was_invalid = user.errors.include?(:email) %>
+
+    <% if was_validated %>
+      <% if email_was_invalid %>
+        <% email_class << " is-invalid" %>
+      <% else %>
+        <% email_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :email %>
+    <!-- Input for email start -->
+    <%= f.text_field :email, class: email_class, placeholder: "Enter email" %>
+    <!-- Input for email end -->
+    <% if email_was_invalid %>
+      <% user.errors.full_messages_for(:email).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for email end -->
+  <!-- Label and input for password_digest start -->
+  <div class="form-group">
+    <% password_digest_class = "form-control" %>
+    <% password_digest_was_invalid = user.errors.include?(:password_digest) %>
+
+    <% if was_validated %>
+      <% if password_digest_was_invalid %>
+        <% password_digest_class << " is-invalid" %>
+      <% else %>
+        <% password_digest_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :password_digest %>
+    <!-- Input for password_digest start -->
+    <%= f.text_field :password_digest, class: password_digest_class, placeholder: "Enter password digest" %>
+    <!-- Input for password_digest end -->
+    <% if password_digest_was_invalid %>
+      <% user.errors.full_messages_for(:password_digest).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for password_digest end -->
+  <!-- Label and input for dish_id start -->
+  <div class="form-group">
+    <% dish_class = "form-control" %>
+    <% dish_was_invalid = user.errors.include?(:dish) %>
+
+    <% if was_validated %>
+      <% if dish_was_invalid %>
+        <% dish_class << " is-invalid" %>
+      <% else %>
+        <% dish_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :dish_id %>
+    <!-- Input for dish_id start -->
+    <%= f.number_field :dish_id, class: dish_class, placeholder: "Enter dish" %>
+    <!-- Input for dish_id end -->
+    <% if dish_was_invalid %>
+      <% user.errors.full_messages_for(:dish).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for dish_id end -->
+  <!-- Label and input for venue_id start -->
+  <div class="form-group">
+    <% venue_class = "form-control" %>
+    <% venue_was_invalid = user.errors.include?(:venue) %>
+
+    <% if was_validated %>
+      <% if venue_was_invalid %>
+        <% venue_class << " is-invalid" %>
+      <% else %>
+        <% venue_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :venue_id %>
+    <!-- Input for venue_id start -->
+    <%= f.number_field :venue_id, class: venue_class, placeholder: "Enter venue" %>
+    <!-- Input for venue_id end -->
+    <% if venue_was_invalid %>
+      <% user.errors.full_messages_for(:venue).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <!-- Label and input for venue_id end -->
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>
