@@ -1,7 +1,6 @@
 <% was_validated = dish.errors.any? %>
 
 <%= form_with(model: dish, local: true, novalidate: true, class: "mb-3") do |f| %>
-  <!-- Label and input for dish start -->
   <div class="form-group">
     <% dish_class = "form-control" %>
     <% dish_was_invalid = dish.errors.include?(:dish) %>
@@ -15,9 +14,7 @@
     <% end %>
 
     <%= f.label :dish %>
-    <!-- Input for dish start -->
     <%= f.text_field :dish, class: dish_class, placeholder: "Enter dish" %>
-    <!-- Input for dish end -->
     <% if dish_was_invalid %>
       <% dish.errors.full_messages_for(:dish).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -26,8 +23,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for dish end -->
-  <!-- Label and input for cuisine_id start -->
   <div class="form-group">
     <% cuisine_class = "form-control" %>
     <% cuisine_was_invalid = dish.errors.include?(:cuisine) %>
@@ -41,9 +36,7 @@
     <% end %>
 
     <%= f.label :cuisine_id %>
-    <!-- Input for cuisine_id start -->
     <%= f.collection_select :cuisine_id, Cuisine.all, :id, :to_s, {}, class: "form-control" %>
-    <!-- Input for cuisine_id end -->
     <% if cuisine_was_invalid %>
       <% dish.errors.full_messages_for(:cuisine).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -52,8 +45,6 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for cuisine_id end -->
-  <!-- Label and input for venue_id start -->
   <div class="form-group">
     <% venue_class = "form-control" %>
     <% venue_was_invalid = dish.errors.include?(:venue) %>
@@ -67,9 +58,7 @@
     <% end %>
 
     <%= f.label :venue_id %>
-    <!-- Input for venue_id start -->
     <%= f.collection_select :venue_id, Venue.all, :id, :to_s, {}, class: "form-control" %>
-    <!-- Input for venue_id end -->
     <% if venue_was_invalid %>
       <% dish.errors.full_messages_for(:venue).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -78,6 +67,5 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for venue_id end -->
   <%= f.button class: "btn btn-outline-secondary btn-block" %>
 <% end %>
