@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    Favorite Dishes
+
+    <a data-toggle="collapse" href="#dish_favorite_dishes_new_form">
+      Add favorite dish
+    </a>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <% @dish.favorite_dishes.each do |favorite_dish| %>
+      <li class="list-group-item d-flex align-items-center justify-content-between">
+        <!-- Show link start -->
+        <%= link_to favorite_dish, favorite_dish %>
+        <!-- Show link end -->
+
+        <!-- Delete link start -->
+        <%= link_to favorite_dish, method: :delete, data: { confirm: "Do you really want to delete this favorite_dish" } do %>
+          <i class="fas fa-trash-alt"></i>
+        <% end %>
+        <!-- Delete link end -->
+
+      </li>
+    <% end %>
+
+    <div class="card-footer">
+      <div class="collapse" id="dish_favorite_dishes_new_form">
+        <!-- New associationcollection form start -->
+
+        <!-- New associationcollection form end -->
+      </div>
+    </div>
+
+  </ul>
+</div>
