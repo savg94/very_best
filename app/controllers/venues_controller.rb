@@ -1,28 +1,23 @@
 class VenuesController < ApplicationController
   before_action :set_venue, only: %i[show edit update destroy]
 
-  # GET /venues
   def index
     @q = Venue.ransack(params[:q])
     @venues = @q.result(distinct: true).includes(:dishes, :favorite_dishes,
                                                  :neighborhood, :users, :favorited_dishes).page(params[:page]).per(10)
   end
 
-  # GET /venues/1
   def show
     @favorite_dish = FavoriteDish.new
     @dish = Dish.new
   end
 
-  # GET /venues/new
   def new
     @venue = Venue.new
   end
 
-  # GET /venues/1/edit
   def edit; end
 
-  # POST /venues
   def create
     @venue = Venue.new(venue_params)
 
@@ -38,7 +33,6 @@ class VenuesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /venues/1
   def update
     if @venue.update(venue_params)
       redirect_to @venue, notice: "Venue was successfully updated."
@@ -47,7 +41,6 @@ class VenuesController < ApplicationController
     end
   end
 
-  # DELETE /venues/1
   def destroy
     @venue.destroy
     message = "Venue was successfully deleted."
@@ -60,12 +53,10 @@ class VenuesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_venue
     @venue = Venue.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def venue_params
     params.require(:venue).permit(:name, :address, :neighborhood_id)
   end

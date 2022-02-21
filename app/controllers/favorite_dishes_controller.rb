@@ -1,25 +1,20 @@
 class FavoriteDishesController < ApplicationController
   before_action :set_favorite_dish, only: %i[show edit update destroy]
 
-  # GET /favorite_dishes
   def index
     @q = FavoriteDish.ransack(params[:q])
     @favorite_dishes = @q.result(distinct: true).includes(:venue, :dish,
                                                           :user).page(params[:page]).per(10)
   end
 
-  # GET /favorite_dishes/1
   def show; end
 
-  # GET /favorite_dishes/new
   def new
     @favorite_dish = FavoriteDish.new
   end
 
-  # GET /favorite_dishes/1/edit
   def edit; end
 
-  # POST /favorite_dishes
   def create
     @favorite_dish = FavoriteDish.new(favorite_dish_params)
 
@@ -35,7 +30,6 @@ class FavoriteDishesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /favorite_dishes/1
   def update
     if @favorite_dish.update(favorite_dish_params)
       redirect_to @favorite_dish,
@@ -45,7 +39,6 @@ class FavoriteDishesController < ApplicationController
     end
   end
 
-  # DELETE /favorite_dishes/1
   def destroy
     @favorite_dish.destroy
     message = "FavoriteDish was successfully deleted."
@@ -58,12 +51,10 @@ class FavoriteDishesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_favorite_dish
     @favorite_dish = FavoriteDish.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def favorite_dish_params
     params.require(:favorite_dish).permit(:user_id, :venue_id, :dish_id)
   end
