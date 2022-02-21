@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   root :to => "venues#index"
   resources :cuisines
   resources :neighborhoods
