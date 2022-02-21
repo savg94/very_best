@@ -8,6 +8,8 @@ class VenueResource < ApplicationResource
 
   # Direct associations
 
+  has_many   :favorite_dishes
+
   has_many   :dishes
 
   # Indirect associations
