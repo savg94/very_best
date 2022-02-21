@@ -3,7 +3,8 @@ class FavoriteDishesController < ApplicationController
 
   # GET /favorite_dishes
   def index
-    @favorite_dishes = FavoriteDish.page(params[:page]).per(10)
+    @q = FavoriteDish.ransack(params[:q])
+    @favorite_dishes = @q.result(:distinct => true).includes(:venue, :dish, :user).page(params[:page]).per(10)
   end
 
   # GET /favorite_dishes/1
