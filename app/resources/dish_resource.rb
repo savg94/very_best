@@ -8,6 +8,8 @@ class DishResource < ApplicationResource
 
   # Direct associations
 
+  has_many   :favorite_dishes
+
   belongs_to :venue
 
   # Indirect associations
