@@ -4,20 +4,20 @@ class Venue < ApplicationRecord
   belongs_to :neighborhood
 
   has_many   :favorite_dishes,
-             :dependent => :nullify
+             dependent: :nullify
 
   has_many   :dishes,
-             :dependent => :nullify
+             dependent: :nullify
 
   # Indirect associations
 
   has_many   :favorited_dishes,
-             :through => :favorite_dishes,
-             :source => :dish
+             through: :favorite_dishes,
+             source: :dish
 
   has_many   :users,
-             :through => :favorite_dishes,
-             :source => :user
+             through: :favorite_dishes,
+             source: :user
 
   # Validations
 
@@ -26,5 +26,4 @@ class Venue < ApplicationRecord
   def to_s
     name
   end
-
 end

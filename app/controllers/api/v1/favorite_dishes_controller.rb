@@ -13,7 +13,7 @@ class Api::V1::FavoriteDishesController < Api::V1::GraphitiController
     favorite_dish = FavoriteDishResource.build(params)
 
     if favorite_dish.save
-      render jsonapi: favorite_dish, status: 201
+      render jsonapi: favorite_dish, status: :created
     else
       render jsonapi_errors: favorite_dish
     end
@@ -33,7 +33,7 @@ class Api::V1::FavoriteDishesController < Api::V1::GraphitiController
     favorite_dish = FavoriteDishResource.find(params)
 
     if favorite_dish.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: favorite_dish
     end

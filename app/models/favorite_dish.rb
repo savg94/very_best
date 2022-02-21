@@ -2,14 +2,14 @@ class FavoriteDish < ApplicationRecord
   # Direct associations
 
   belongs_to :user,
-             :counter_cache => true
+             counter_cache: true
 
   belongs_to :dish,
-             :counter_cache => true
+             counter_cache: true
 
   belongs_to :venue,
-             :required => false,
-             :counter_cache => true
+             optional: true,
+             counter_cache: true
 
   # Indirect associations
 
@@ -20,5 +20,4 @@ class FavoriteDish < ApplicationRecord
   def to_s
     user.to_s
   end
-
 end

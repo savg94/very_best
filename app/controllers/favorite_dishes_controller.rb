@@ -1,15 +1,15 @@
 class FavoriteDishesController < ApplicationController
-  before_action :set_favorite_dish, only: [:show, :edit, :update, :destroy]
+  before_action :set_favorite_dish, only: %i[show edit update destroy]
 
   # GET /favorite_dishes
   def index
     @q = FavoriteDish.ransack(params[:q])
-    @favorite_dishes = @q.result(:distinct => true).includes(:venue, :dish, :user).page(params[:page]).per(10)
+    @favorite_dishes = @q.result(distinct: true).includes(:venue, :dish,
+                                                          :user).page(params[:page]).per(10)
   end
 
   # GET /favorite_dishes/1
-  def show
-  end
+  def show; end
 
   # GET /favorite_dishes/new
   def new
@@ -17,17 +17,16 @@ class FavoriteDishesController < ApplicationController
   end
 
   # GET /favorite_dishes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /favorite_dishes
   def create
     @favorite_dish = FavoriteDish.new(favorite_dish_params)
 
     if @favorite_dish.save
-      message = 'FavoriteDish was successfully created.'
-      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-        redirect_back fallback_location: request.referrer, notice: message
+      message = "FavoriteDish was successfully created."
+      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referer, notice: message
       else
         redirect_to @favorite_dish, notice: message
       end
@@ -39,7 +38,8 @@ class FavoriteDishesController < ApplicationController
   # PATCH/PUT /favorite_dishes/1
   def update
     if @favorite_dish.update(favorite_dish_params)
-      redirect_to @favorite_dish, notice: 'Favorite dish was successfully updated.'
+      redirect_to @favorite_dish,
+                  notice: "Favorite dish was successfully updated."
     else
       render :edit
     end
@@ -49,22 +49,22 @@ class FavoriteDishesController < ApplicationController
   def destroy
     @favorite_dish.destroy
     message = "FavoriteDish was successfully deleted."
-    if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-      redirect_back fallback_location: request.referrer, notice: message
+    if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+      redirect_back fallback_location: request.referer, notice: message
     else
       redirect_to favorite_dishes_url, notice: message
     end
   end
 
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_favorite_dish
-      @favorite_dish = FavoriteDish.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def favorite_dish_params
-      params.require(:favorite_dish).permit(:user_id, :venue_id, :dish_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_favorite_dish
+    @favorite_dish = FavoriteDish.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def favorite_dish_params
+    params.require(:favorite_dish).permit(:user_id, :venue_id, :dish_id)
+  end
 end

@@ -2,17 +2,17 @@ class User < ApplicationRecord
   # Direct associations
 
   has_many   :favorite_dishes,
-             :dependent => :destroy
+             dependent: :destroy
 
   # Indirect associations
 
   has_many   :dishes,
-             :through => :favorite_dishes,
-             :source => :dish
+             through: :favorite_dishes,
+             source: :dish
 
   has_many   :venues,
-             :through => :favorite_dishes,
-             :source => :venue
+             through: :favorite_dishes,
+             source: :venue
 
   # Validations
 
@@ -21,5 +21,4 @@ class User < ApplicationRecord
   def to_s
     name
   end
-
 end

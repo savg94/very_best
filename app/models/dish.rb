@@ -4,21 +4,21 @@ class Dish < ApplicationRecord
   belongs_to :cuisine
 
   has_many   :favorite_dishes,
-             :dependent => :destroy
+             dependent: :destroy
 
   belongs_to :venue,
-             :required => false,
-             :counter_cache => true
+             optional: true,
+             counter_cache: true
 
   # Indirect associations
 
   has_many   :venues,
-             :through => :favorite_dishes,
-             :source => :venue
+             through: :favorite_dishes,
+             source: :venue
 
   has_many   :users,
-             :through => :favorite_dishes,
-             :source => :user
+             through: :favorite_dishes,
+             source: :user
 
   # Validations
 
@@ -27,5 +27,4 @@ class Dish < ApplicationRecord
   def to_s
     dish
   end
-
 end

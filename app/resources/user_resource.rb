@@ -10,12 +10,11 @@ class UserResource < ApplicationResource
 
   # Direct associations
 
-  has_many   :favorite_dishes
+  has_many :favorite_dishes
 
   # Indirect associations
 
   many_to_many :dishes
 
   many_to_many :venues
-
 end

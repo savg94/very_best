@@ -15,5 +15,4 @@ class FavoriteDishResource < ApplicationResource
   belongs_to :venue
 
   # Indirect associations
-
 end
