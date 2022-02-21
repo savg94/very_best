@@ -1,6 +1,8 @@
 class Venue < ApplicationRecord
   # Direct associations
 
+  belongs_to :neighborhood
+
   has_many   :favorite_dishes,
              :dependent => :nullify
 
